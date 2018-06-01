@@ -1,0 +1,68 @@
+{% load staticfiles %}
+
+<h3>Select a Resource type to add</h3>
+
+<div class="container" id="logo-banner">
+    <div class="row">
+        <div class="col-sm-2">
+            <a href="{% url 'core_curate_start_from_role' 'organization' %}">
+			<i class="fa fa-university fa-5x" aria-hidden="true" style="color: #2CAAE2;"></i>
+            <br>
+            Organization
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <a href="{% url 'core_curate_start_from_role' 'datacollection' %}">
+            <i class="fa fa-table fa-5x" aria-hidden="true" style="color: #A1C057;"></i>
+            <br>
+            Data Collection
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <a href="{% url 'core_curate_start_from_role' 'dataset' %}">
+            <i class="fa fa-database fa-5x" aria-hidden="true" style="color: grey;"></i>
+            <br>
+            Dataset
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <a href="{% url 'core_curate_start_from_role' 'service' %}">
+            <i class="fa fa-cogs fa-5x" aria-hidden="true" style="color: #EBB057;"></i><br>
+            Service
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <a href="{% url 'core_curate_start_from_role' 'informational' %}">
+            <i class="fa fa-laptop fa-5x" aria-hidden="true"
+            style="color: #257ABC;"></i><br>
+            Informational
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <a href="{% url 'core_curate_start_from_role' 'software' %}">
+            <i class="fa fa-tachometer fa-5x" aria-hidden="true" style="color: #79B320;"></i><br>
+            Software
+            </a>
+        </div>
+    </div>
+</div>
+
+<br/><br/>
+<a href="{% url 'core_curate_start_from_role' 'organization' %}">Organization</a> -
+a group of people that come together to contribute to or participate in a federated data operation. Organizations can be hierarchical: an organization can contain or sponsor other organizations. Organizations can also aggregate or participate with other organizations in broader collaborations.
+<br><br>
+<a href="{% url 'core_curate_start_from_role' 'datacollection' %}">Data Collection</a> - An aggregation of one or more datasets, possibly spanning many research projects or teams.
+<br><br>
+<ul>
+<li> <a href="{% url 'core_curate_start_from_role' 'repository' %}">Repository</a> - A data collection service that specializes in hosting data from many different research teams and projects.
+<li> <a href="{% url 'core_curate_start_from_role' 'projectarchive' %}">Project Archive</a> - A large collection of data resulting from a project that produces and publishes data over an extended period of time and made accessible through a common portal or interface.
+<li> <a href="{% url 'core_curate_start_from_role' 'database' %}">Database</a> - A collection of data that is not formally file-based but stored in a database system. Here, a database is not assumed to be relational and can be quite complex in structure.
+</ul>
+<a href="{% url 'core_curate_start_from_role' 'dataset' %}">Dataset</a> -
+a set of data (can be one or more separate files or other digital objects) that is unified by a common set of research goals and/or results. This is intended to be a single publishable unit of scientific output that might be described in a single journal article.
+<br><br>
+<a href="{% url 'core_curate_start_from_role' 'service' %}">Service</a> - A set of stand-alone services not associated with a particular collection of data but which can either operate on data or produce data. Such a resource might typically accessed either through a web-based portal, a suite of web services, or both.
+<br><br>
+<a href="{% url 'core_curate_start_from_role' 'informational' %}">Informational</a> - A (web) site that aggregates useful information for research. The information is not generally machine-processable, but rather is intended for consumption by a human (e.g. via a web browser).
+<br><br>
+<a href="{% url 'core_curate_start_from_role' 'software' %}">Software</a> - A software tool or library.

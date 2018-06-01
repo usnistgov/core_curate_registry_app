@@ -1,0 +1,1 @@
+var startCurate = "{% url 'core_curate_start' %}?role=" + "{{data.role}}" ;

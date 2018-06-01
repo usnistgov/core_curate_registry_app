@@ -1,0 +1,45 @@
+{% load staticfiles %}
+
+<div class="title-page">
+{% if data.role == 'organization' %}
+<i class="fa fa-university" aria-hidden="true" style="color: #2CAAE2;"></i> Add a new Organization
+{% elif data.role == 'datacollection' %}
+<i class="fa fa-table" aria-hidden="true" style="color: #A1C057;"></i> Add a new Data Collection
+{% elif data.role == 'repository' %}
+<i class="fa fa-table" aria-hidden="true" style="color: #A1C057;"></i> Add a new Repository
+{% elif data.role == 'projectarchive' %}
+<i class="fa fa-table" aria-hidden="true" style="color: #A1C057;"></i> Add a new Project Archive
+{% elif data.role == 'database' %}
+<i class="fa fa-database" aria-hidden="true" style="color: grey;"></i> Add a new Database
+{% elif data.role == 'dataset' %}
+<i class="fa fa-database" aria-hidden="true" style="color: grey;"></i> Add a new Dataset
+{% elif data.role == 'service' %}
+<i class="fa fa-cogs" aria-hidden="true" style="color: #EBB057;"></i> Add a new Service
+{% elif data.role == 'informational' %}
+<i class="fa fa-laptop" aria-hidden="true" style="color: #257ABC;"></i> Add a new Informational Site
+{% elif data.role == 'software' %}
+<i class="fa fa-tachometer" aria-hidden="true" style="color: #79B320;"></i> Add a new Software
+{% else %}
+Add a new Resource
+{% endif %}
+</div>
+
+<br/>
+
+<div class="alert alert-danger" id="banner_errors" style="display: none;">
+        <a href="#" class="close" data-hide="alert" aria-label="close">&times;</a>
+     	<h4><i class="fa fa-exclamation-circle"></i> Error</h4>
+        <div id="form_start_errors">
+</div>
+</div>
+
+Please select one of the following options to Add your Resource. You can create a new record, or upload an XML file.
+
+<br/><br/>
+<div id="form_start_content">
+</div>
+<div id="template_id" class="hidden">{{data.template_id}}</div>
+<br/><br/>
+
+<button id="btn-display-data" class="btn btn-primary">Start</button>
+<div id="role" class="hidden">{{ data.role }}</div>

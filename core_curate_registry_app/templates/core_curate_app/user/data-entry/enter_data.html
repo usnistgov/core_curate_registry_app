@@ -1,0 +1,22 @@
+<h3>{% if data.edit %}Edit{% else %}Add new{% endif %} Resource</h3>
+
+<div class="toolbar">
+	<div class="btn-group pull-right">
+		<a class="btn btn-danger clear-fields"><i class="fa fa-eraser"></i> Clear Fields </a>
+        <a class="btn btn-danger cancel-changes"><i class="fa fa-refresh"></i> Cancel Changes </a>
+        <a class="btn btn-danger cancel-form"><i class="fa fa-times"></i> Cancel Form </a>
+    	<a class="btn btn-default save-form"><i class="fa fa-floppy-o"></i> Save Form </a>
+    	<a class="btn btn-default download"><i class="fa fa-download"></i> Download </a>
+        <a class="btn btn-default validate"><i style="color:green;" class="fa fa-check-square"></i> Validate </a>
+	</div>
+    <br/><br/>
+
+    <span>Title: {{data.data_structure.name}}</span>
+
+    <div id="xsdForm" class="xsdForm">
+        {{data.xsd_form|safe}}
+    </div>
+</div>
+
+<div id="curate_data_structure_id" class="hidden">{{ data.data_structure.id }}</div>
+<div id="role" class="hidden">{{ request.GET.role }}</div>
