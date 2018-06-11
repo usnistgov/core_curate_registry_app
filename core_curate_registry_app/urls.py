@@ -18,11 +18,11 @@ urlpatterns = [
         name='core_curate_start'),
     url(r'^start_curate/(?P<role>\w+)/$', user_registry_views.start_curate,
         name='core_curate_start_from_role'),
-    url(r'^enter-data/(?P<curate_data_structure_id>\w+)$', user_views.enter_data,
+    url(r'^enter-data/(?P<curate_data_structure_id>\w+)$', user_registry_views.EnterDataRegistryView.as_view(),
         name='core_curate_enter_data'),
     # FIXME: url to allow reopening a form with unsaved changes (may be temporary until curate workflow redesign)
     url(r'^enter-data/(?P<curate_data_structure_id>\w+)/(?P<reload_unsaved_changes>\w+)$',
-        user_views.enter_data,
+        user_registry_views.EnterDataRegistryView.as_view(),
         name='core_curate_enter_data'),
     url(r'^view-data/(?P<curate_data_structure_id>\w+)$', user_views.view_data,
         name='core_curate_view_data'),

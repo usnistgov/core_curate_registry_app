@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 
 import core_curate_app.permissions.rights as rights
 import core_main_app.utils.decorators as decorators
+from core_curate_app.views.user.views import EnterDataView
 from core_explore_keyword_registry_app.settings import REGISTRY_XSD_FILENAME
 from core_main_app.components.version_manager import api as version_manager_api
 from core_main_app.utils.rendering import render
@@ -67,3 +68,14 @@ def start_curate(request, role):
                   assets=assets,
                   context=context)
 
+
+class EnterDataRegistryView(EnterDataView):
+
+    def __init__(self):
+        super(EnterDataRegistryView, self).__init__()
+        self.assets['js'].append(
+            {
+                "path": 'core_curate_registry_app/user/js/role.js',
+                "is_raw": False
+            }
+        )
