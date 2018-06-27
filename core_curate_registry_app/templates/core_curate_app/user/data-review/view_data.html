@@ -1,0 +1,22 @@
+{% load xsl_transform_tag %}
+<h1>View Data</h1>
+
+<div class="btn-group pull-right">
+    <a class="btn btn-danger" href="{% url 'core_curate_enter_data' data.data_structure.id True %}">Back to Form</a>
+	<a class="btn btn-default" href="{% url 'core_curate_download_xml' data.data_structure.id %}">
+        <i class="fa fa-download"></i>Download XML</a>
+    {% if data.data_structure.data.workspace.is_public %}
+    <a class="btn btn-default save-to-repo"><i class="fa fa-floppy-o"></i> Publish</a>
+    {% else %}
+	<a class="btn btn-default save-to-repo"><i class="fa fa-floppy-o"></i> Save to Repository</a>
+    {% endif %}
+</div>
+
+<span>Title: {{data.data_structure.name}}</span>
+
+<div id="XMLHolder">
+{% xsl_transform_detail xml_content=data.xml_string as xml_representation %}
+{{ xml_representation|safe}}
+</div>
+
+<div id="curate_data_structure_id" style="display: none;">{{ data.data_structure.id }}</div>
