@@ -79,3 +79,15 @@ class EnterDataRegistryView(EnterDataView):
                 "is_raw": False
             }
         )
+
+    def build_context(self, request, curate_data_structure, reload_unsaved_changes):
+        # get the role before module initialization
+        role = request.GET.get('role', None)
+        # build context
+        context = super(EnterDataRegistryView, self).build_context(request,
+                                                                   curate_data_structure,
+                                                                   reload_unsaved_changes)
+        # update context with role
+        context['role'] = role
+        # return context
+        return context
