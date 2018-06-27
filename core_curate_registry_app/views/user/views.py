@@ -87,7 +87,10 @@ class EnterDataRegistryView(EnterDataView):
         context = super(EnterDataRegistryView, self).build_context(request,
                                                                    curate_data_structure,
                                                                    reload_unsaved_changes)
-        # update context with role
-        context['role'] = role
+        # don't give a role to select, if editing a form
+        if not curate_data_structure.form_string:
+            # update context with role
+            context['role'] = role
+
         # return context
         return context
