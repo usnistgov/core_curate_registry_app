@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse_lazy
 import core_curate_app.permissions.rights as rights
 import core_curate_app.views.user.ajax as user_ajax
 import core_curate_app.views.user.views as user_views
-import core_curate_registry_app.views.user.views as user_registry_views
 import core_curate_registry_app.views.user.ajax as user_registry_ajax
+import core_curate_registry_app.views.user.views as user_registry_views
 from core_curate_app.views.common import views as common_views
 from core_main_app.utils.decorators import permission_required
 
