@@ -1,0 +1,17 @@
+{% extends 'core_main_app/_render/admin/theme/tools/modal.html' %}
+{% load i18n %}
+
+{% block modal_id %}save-form-registry-modal{% endblock %}
+{% block modal_title %}Save succesful{% endblock %}
+
+{% block modal_body %}
+This document is saved as unpublished, do you want to publish it?
+{% endblock %}
+
+{% block modal_footer %}
+<a class="btn btn-danger" href="{% url 'core_curate_index' %}"><i class="fa fa-home"></i> No, return to curate page</a>
+<a class="btn btn-danger" href="{% url 'core_dashboard_records' %}"><i class="fa fa-home"></i> No, return to resource page</a>
+
+<a class="btn btn-default publish"><i style="color:green;" class="fa fa-check"></i> Publish it
+</a>
+{% endblock %}

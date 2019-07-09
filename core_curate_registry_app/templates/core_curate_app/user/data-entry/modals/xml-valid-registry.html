@@ -1,0 +1,17 @@
+{% extends 'core_main_app/_render/admin/theme/tools/modal.html' %}
+{% load i18n %}
+
+{% block modal_id %}xml-valid-registry-modal{% endblock %}
+{% block modal_title %}Validation Successful{% endblock %}
+
+{% block modal_body %}
+This {% trans "form_label" %} is valid. You can check the values by proceeding to the review page.
+{% include 'core_curate_app/user/data-entry/modals/validation-warning.html' %}
+{% endblock %}
+
+{% block modal_footer %}
+<a class="btn btn-default pull-left" data-dismiss="modal" href="#"><i class="fa fa-times"></i> Return to draft</a>
+<a class="btn btn-primary" href="{% url 'core_curate_view_data' data.data_structure.id %}">
+    <i class="fa fa-check"></i> Proceed to Review
+</a>
+{% endblock %}

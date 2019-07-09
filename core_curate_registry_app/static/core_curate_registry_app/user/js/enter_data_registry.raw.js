@@ -1,0 +1,1 @@
+var review_registry_url = "{% url 'core_curate_view_data' data.data_structure.id %}" ;

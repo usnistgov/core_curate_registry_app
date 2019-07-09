@@ -10,8 +10,12 @@
     {% if data.data_structure.data.workspace.is_public %}
     <a class="btn btn-default save-to-repo"><i class="fa fa-floppy-o"></i> Publish</a>
     {% else %}
-	<a class="btn btn-default save-to-repo"><i class="fa fa-floppy-o"></i> Save to Repository</a>
+    <a class="btn btn-default save-to-repo-registry"><i  class="fa fa-floppy-o"></i> Save to Repository</a>
     {% endif %}
+
+</div>
+
+<div id = "data_id" class="hidden" >
 </div>
 
 <span>Title: {{data.data_structure.name}}</span>
@@ -21,4 +25,4 @@
 {{ xml_representation|safe}}
 </div>
 
-<div id="curate_data_structure_id" style="display: none;">{{ data.data_structure.id }}</div>
+<div id="curate_data_structure_id" class="hidden">{{ data.data_structure.id }}</div>

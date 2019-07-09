@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 import core_curate_app.permissions.rights as rights
 import core_main_app.utils.decorators as decorators
 from core_curate_app.views.user.views import EnterDataView
+from core_curate_app.views.user.views import ViewDataView
 from core_explore_keyword_registry_app.settings import REGISTRY_XSD_FILENAME
 from core_main_app.components.version_manager import api as version_manager_api
 from core_main_app.utils.rendering import render
@@ -73,12 +74,20 @@ class EnterDataRegistryView(EnterDataView):
 
     def __init__(self):
         super(EnterDataRegistryView, self).__init__()
-        self.assets['js'].append(
+        self.assets['js'].extend((
             {
                 "path": 'core_curate_registry_app/user/js/role.js',
                 "is_raw": False
+            },
+            {
+                "path": 'core_curate_registry_app/user/js/enter_data_registry.js',
+                "is_raw": False
             }
-        )
+
+        ))
+        self.modals = [
+            'core_curate_app/user/data-entry/modals/xml-valid-registry.html'
+        ]
 
     def build_context(self, request, curate_data_structure, reload_unsaved_changes):
         # get the role before module initialization
@@ -93,4 +102,25 @@ class EnterDataRegistryView(EnterDataView):
             context['role'] = role
 
         # return context
+        return context
+
+
+class ViewDataRegistryView(ViewDataView):
+
+    def __init__(self):
+        super(ViewDataRegistryView, self).__init__()
+        self.assets['js'].append(
+            {
+                "path": 'core_curate_app/user/js/view_data_registry.js',
+                "is_raw": False
+            }
+        )
+
+        self.modals = [
+            'core_curate_app/user/data-review/modals/save-form-registry.html'
+        ]
+
+    def build_context(self, request, curate_data_structure):
+
+        context = super(ViewDataRegistryView, self).build_context(request,curate_data_structure)
         return context

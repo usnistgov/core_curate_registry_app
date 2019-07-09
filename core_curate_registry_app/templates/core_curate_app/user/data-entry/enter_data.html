@@ -6,13 +6,17 @@
 		<a class="btn btn-danger clear-fields"><i class="fa fa-eraser"></i> Clear Fields </a>
         <a class="btn btn-danger cancel-changes"><i class="fa fa-refresh"></i> Cancel Changes </a>
         <a class="btn btn-danger cancel-form"><i class="fa fa-times"></i> Cancel {% trans "form_label"|title %} </a>
-    	<a class="btn btn-default save-form"><i class="fa fa-floppy-o"></i> Save {% trans "form_label"|title %} </a>
-    	<a class="btn btn-default download"><i class="fa fa-download"></i> Download </a>
-        <a class="btn btn-default validate"><i style="color:green;" class="fa fa-check-square"></i> Validate </a>
+    	<a class="btn btn-default save-form-registry"><i class="fa fa-floppy-o"></i> Save {% trans "form_label"|title %} </a>
+        <a href= "{% url 'core_curate_download_xml' data.data_structure.id %}" class="btn btn-default download-registry"><i class="fa fa-download"></i> Download </a>
+        <a class="btn btn-default validate"><i style="color:green;" class="fa fa-check-square"></i> Validate -> Review </a>
+
 	</div>
     <br/><br/>
 
     <span>Title: {{data.data_structure.name}}</span>
+    <div id = "data_title" class = "hidden" >
+    {{data.data_structure.name}}
+    </div>
 
     <div id="xsdForm" class="xsdForm">
         {{data.xsd_form|safe}}
