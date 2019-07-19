@@ -9,6 +9,9 @@ from core_curate_app.views.user.views import ViewDataView
 from core_explore_keyword_registry_app.settings import REGISTRY_XSD_FILENAME
 from core_main_app.components.version_manager import api as version_manager_api
 from core_main_app.utils.rendering import render
+from core_main_registry_app.components.custom_resource import api as custom_resource_api
+from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
+from core_main_app.commons import exceptions
 
 
 @decorators.permission_required(content_type=rights.curate_content_type,
@@ -22,15 +25,28 @@ def index(request):
     Returns:
 
     """
-
     assets = {
-        "css": ['core_curate_registry_app/user/css/index.css'],
+        "css": ['core_curate_registry_app/user/css/index.css',
+                'core_main_registry_app/user/css/resource_banner/selection.css'],
+        "js": [
+            {
+                "path": 'core_curate_registry_app/user/js/banner.js',
+                "is_raw": False
+            }
+        ]
     }
+
+    # Get custom resources for the current template
+    custom_resources = custom_resource_api.get_all_of_current_template().order_by('sort')
 
     return render(request,
                   'core_curate_registry_app/user/index.html',
                   assets=assets,
-                  context={})
+                  context={
+                      'custom_resources': custom_resources,
+                      'display_not_resource': False,
+                      'type_resource': CUSTOM_RESOURCE_TYPE.RESOURCE,
+                  })
 
 
 @decorators.permission_required(content_type=rights.curate_content_type,
@@ -60,9 +76,16 @@ def start_curate(request, role):
         "css": ['core_curate_app/user/css/style.css']
     }
 
+    try:
+        # Get custom resources for the current template
+        custom_resource = custom_resource_api.get_by_current_template_and_slug(role)
+    except exceptions.DoesNotExist:
+        custom_resource = None
+
     context = {
         'template_id': version_manager_api.get_active_global_version_manager_by_title(REGISTRY_XSD_FILENAME).current,
         'role': role,
+        'custom_resource': custom_resource
     }
     return render(request,
                   'core_curate_app/user/curate.html',
@@ -98,8 +121,15 @@ class EnterDataRegistryView(EnterDataView):
                                                                    reload_unsaved_changes)
         # don't give a role to select, if editing a form
         if not curate_data_structure.form_string:
+            try:
+                # Get custom resources for the current template
+                custom_resource = custom_resource_api.get_by_current_template_and_slug(role)
+            except exceptions.DoesNotExist:
+                custom_resource = None
+
             # update context with role
-            context['role'] = role
+            context['role_choice'] = custom_resource.role_choice if custom_resource else None
+            context['role_type'] = custom_resource.role_type if custom_resource else None
 
         # return context
         return context

@@ -16,7 +16,7 @@ urlpatterns = [
         name='core_curate_index'),
     url(r'^start_curate$', user_registry_ajax.start_curate,
         name='core_curate_start'),
-    url(r'^start_curate/(?P<role>\w+)/$', user_registry_views.start_curate,
+    url(r'^start_curate/(?P<role>[\w-]+)/$', user_registry_views.start_curate,
         name='core_curate_start_from_role'),
     url(r'^enter-data/(?P<curate_data_structure_id>\w+)$', user_registry_views.EnterDataRegistryView.as_view(),
         name='core_curate_enter_data'),
