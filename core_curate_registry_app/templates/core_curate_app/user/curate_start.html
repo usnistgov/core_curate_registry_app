@@ -1,6 +1,8 @@
 {% load i18n %}
+{% load dict_key_extras %}
+
 <form id="form_select_template">
-		<input type="radio" name="curate_form" value="new"> <b class="pop_curate_label">Create a new document:</b>
+		<input type="radio" name="curate_form" value="new"> <b class="pop_curate_label">Create a new {{ request.GET|get:'role' }}:</b>
 		{{new_form}}
 
 		<div class="hidden">
