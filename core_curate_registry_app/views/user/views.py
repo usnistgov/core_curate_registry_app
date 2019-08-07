@@ -6,12 +6,15 @@ import core_curate_app.permissions.rights as rights
 import core_main_app.utils.decorators as decorators
 from core_curate_app.views.user.views import EnterDataView
 from core_curate_app.views.user.views import ViewDataView
+from core_curate_registry_app.settings import XPATH_TITLE
+from core_curate_registry_app.utils import jquery as jquery_utils
 from core_explore_keyword_registry_app.settings import REGISTRY_XSD_FILENAME
+from core_main_app.commons import exceptions
 from core_main_app.components.version_manager import api as version_manager_api
 from core_main_app.utils.rendering import render
 from core_main_registry_app.components.custom_resource import api as custom_resource_api
 from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
-from core_main_app.commons import exceptions
+from core_parser_app.components.data_structure_element import api as data_structure_element_api
 
 
 @decorators.permission_required(content_type=rights.curate_content_type,
@@ -105,6 +108,14 @@ class EnterDataRegistryView(EnterDataView):
             {
                 "path": 'core_curate_registry_app/user/js/enter_data_registry.js',
                 "is_raw": False
+            },
+            {
+                "path": 'core_curate_registry_app/user/js/title.js',
+                "is_raw": False
+            },
+            {
+                "path": 'core_curate_registry_app/user/js/enter_data_registry.raw.js',
+                "is_raw": True
             }
 
         ))
@@ -126,6 +137,14 @@ class EnterDataRegistryView(EnterDataView):
                 custom_resource = custom_resource_api.get_by_current_template_and_slug(role)
             except exceptions.DoesNotExist:
                 custom_resource = None
+
+            list_data_structure_element = data_structure_element_api.get_by_xpath(XPATH_TITLE)
+            list_data_structure_element = (list(list_data_structure_element))
+            data_id_list = []
+            for i in range(len(list_data_structure_element)):
+                data_id_list.append(list_data_structure_element[i]['id'])
+            jquery_selector = jquery_utils.get_jquery_selector_from_data_structure(data_id_list)
+            context['data_Elements'] = jquery_selector
 
             # update context with role
             context['role_choice'] = custom_resource.role_choice if custom_resource else None
