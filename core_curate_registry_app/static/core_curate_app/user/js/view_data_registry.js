@@ -11,9 +11,11 @@ $(document).ready(function(){
  */
 var displaySaveForm = function(){
     $("#save-form-registry-modal").modal({
+            show: true,
     		backdrop: 'static',
     		keyboard: false
 		});
+    $(".close").hide();
     $("#save-form-registry-modal").modal("show");
 };
 
