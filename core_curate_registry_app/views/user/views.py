@@ -119,9 +119,11 @@ class EnterDataRegistryView(EnterDataView):
             }
 
         ))
-        self.modals = [
-            'core_curate_app/user/data-entry/modals/xml-valid-registry.html'
-        ]
+        self.modals.extend(
+            [
+                'core_curate_app/user/data-entry/modals/xml-valid-registry.html'
+            ]
+        )
 
     def build_context(self, request, curate_data_structure, reload_unsaved_changes):
         # get the role before module initialization
