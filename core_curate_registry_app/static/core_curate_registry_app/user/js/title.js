@@ -1,5 +1,8 @@
 $(document).ready(function(){
-    getResourceName(dataElements);
+    if (dataElements != "" )
+    {
+        getResourceName(dataElements);
+    }
 });
 
 /**
