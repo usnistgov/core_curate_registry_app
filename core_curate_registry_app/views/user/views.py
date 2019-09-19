@@ -48,7 +48,7 @@ def index(request):
                   context={
                       'custom_resources': custom_resources,
                       'display_not_resource': False,
-                      'type_resource': CUSTOM_RESOURCE_TYPE.RESOURCE,
+                      'type_resource': CUSTOM_RESOURCE_TYPE.RESOURCE.value,
                   })
 
 
