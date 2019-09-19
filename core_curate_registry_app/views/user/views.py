@@ -30,7 +30,9 @@ def index(request):
     """
     assets = {
         "css": ['core_curate_registry_app/user/css/index.css',
-                'core_main_registry_app/user/css/resource_banner/selection.css'],
+                'core_main_registry_app/user/css/resource_banner/selection.css',
+                'core_main_registry_app/user/css/resource_banner/resource_banner.css'
+        ],
         "js": [
             {
                 "path": 'core_curate_registry_app/user/js/banner.js',
