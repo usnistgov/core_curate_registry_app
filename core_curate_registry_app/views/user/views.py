@@ -134,6 +134,12 @@ class EnterDataRegistryView(EnterDataView):
         context = super(EnterDataRegistryView, self).build_context(request,
                                                                    curate_data_structure,
                                                                    reload_unsaved_changes)
+
+        # init variables in context
+        context['data_Elements'] = None
+        context['role_choice'] = None
+        context['role_type'] = None
+        
         # don't give a role to select, if editing a form
         if not curate_data_structure.form_string:
             try:
