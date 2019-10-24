@@ -1,6 +1,6 @@
 """Curate registry app user views
 """
-from django.urls import reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 
 import core_curate_app.permissions.rights as rights
 import core_main_app.utils.decorators as decorators
