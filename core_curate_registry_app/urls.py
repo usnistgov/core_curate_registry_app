@@ -13,9 +13,9 @@ from core_main_app.utils.decorators import permission_required
 urlpatterns = [
     re_path(r'^$', user_registry_views.index,
             name='core_curate_index'),
-    re_path(r'^start_curate$', user_registry_ajax.start_curate,
+    re_path(r'^start_curate$', user_registry_ajax.StartCurate.as_view(),
             name='core_curate_start'),
-    re_path(r'^start_curate/(?P<role>[\w-]+)/$', user_registry_views.start_curate,
+    re_path(r'^start_curate/(?P<role>[\w-]+)/$', user_registry_views.StartCurate.as_view(),
             name='core_curate_start_from_role'),
     re_path(r'^enter-data/(?P<curate_data_structure_id>\w+)$', user_registry_views.EnterDataRegistryView.as_view(),
             name='core_curate_enter_data'),

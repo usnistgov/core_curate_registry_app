@@ -6,8 +6,6 @@ import core_curate_app.permissions.rights as rights
 import core_main_app.utils.decorators as decorators
 from core_curate_app.views.user.views import EnterDataView
 from core_curate_app.views.user.views import ViewDataView
-from core_curate_registry_app.settings import XPATH_TITLE
-from core_curate_registry_app.utils import jquery as jquery_utils
 from core_explore_keyword_registry_app.settings import REGISTRY_XSD_FILENAME
 from core_main_app.commons import exceptions
 from core_main_app.components.version_manager import api as version_manager_api
@@ -15,6 +13,11 @@ from core_main_app.utils.rendering import render
 from core_main_registry_app.components.custom_resource import api as custom_resource_api
 from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
 from core_parser_app.components.data_structure_element import api as data_structure_element_api
+from django.utils.decorators import method_decorator
+from django.views import View
+
+from core_curate_registry_app.settings import XPATH_TITLE
+from core_curate_registry_app.utils import jquery as jquery_utils
 
 
 @decorators.permission_required(content_type=rights.curate_content_type,
@@ -54,48 +57,57 @@ def index(request):
                   })
 
 
-@decorators.permission_required(content_type=rights.curate_content_type,
-                                permission=rights.curate_access, login_url=reverse_lazy("core_main_app_login"))
-def start_curate(request, role):
-    """ Start curate with role parameter.
-
-    Args:
-        request:
-        role:
-
-    Returns:
-
+class StartCurate(View):
+    """ Start curate.
     """
-    assets = {
-        "js": [
-            {
-                "path": 'core_curate_app/user/js/select_template.js',
-                "is_raw": False
-            },
-            {
-                "path": 'core_curate_registry_app/user/js/start_curate.js',
-                "is_raw": False
-            },
 
-        ],
-        "css": ['core_curate_app/user/css/style.css']
-    }
+    def __init__(self):
+        super(StartCurate, self).__init__()
+        self.assets = {
+            "js": [
+                {
+                    "path": 'core_curate_app/user/js/select_template.js',
+                    "is_raw": False
+                },
+                {
+                    "path": 'core_curate_registry_app/user/js/start_curate.js',
+                    "is_raw": False
+                },
 
-    try:
-        # Get custom resources for the current template
-        custom_resource = custom_resource_api.get_by_current_template_and_slug(role)
-    except exceptions.DoesNotExist:
-        custom_resource = None
+            ],
+            "css": ['core_curate_app/user/css/style.css']
+        }
+        self.modals = []
 
-    context = {
-        'template_id': version_manager_api.get_active_global_version_manager_by_title(REGISTRY_XSD_FILENAME).current,
-        'role': role,
-        'custom_resource': custom_resource
-    }
-    return render(request,
-                  'core_curate_app/user/curate.html',
-                  assets=assets,
-                  context=context)
+    @method_decorator(decorators.
+                      permission_required(content_type=rights.curate_content_type,
+                                          permission=rights.curate_access,
+                                          login_url=reverse_lazy("core_main_app_login")))
+    def get(self, request, role):
+        """ Start curate with role parameter.
+            Args:
+                request:
+                role:
+
+            Returns:
+        """
+        try:
+            # Get custom resources for the current template
+            custom_resource = custom_resource_api.get_by_current_template_and_slug(role)
+        except exceptions.DoesNotExist:
+            custom_resource = None
+
+        context = {
+            'template_id': version_manager_api.get_active_global_version_manager_by_title(
+                REGISTRY_XSD_FILENAME).current,
+            'role': role,
+            'custom_resource': custom_resource
+        }
+        return render(request,
+                      'core_curate_app/user/curate.html',
+                      assets=self.assets,
+                      modals=self.modals,
+                      context=context)
 
 
 class EnterDataRegistryView(EnterDataView):
