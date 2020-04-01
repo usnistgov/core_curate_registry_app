@@ -151,6 +151,8 @@ class EnterDataRegistryView(EnterDataView):
         context['data_Elements'] = None
         context['role_choice'] = None
         context['role_type'] = None
+        context['icon']: None
+        context['icon_color']: None
         
         # don't give a role to select, if editing a form
         if not curate_data_structure.form_string:
@@ -171,6 +173,8 @@ class EnterDataRegistryView(EnterDataView):
             # update context with role
             context['role_choice'] = custom_resource.role_choice if custom_resource else None
             context['role_type'] = custom_resource.role_type if custom_resource else None
+            context['icon'] = custom_resource.icon if custom_resource else None
+            context['icon_color'] = custom_resource.icon_color if custom_resource else None
 
         # return context
         return context
