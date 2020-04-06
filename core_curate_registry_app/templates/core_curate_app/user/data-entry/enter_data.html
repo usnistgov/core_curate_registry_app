@@ -13,12 +13,12 @@
 
 <div class="toolbar">
 	<div class="btn-group pull-right">
-		<a class="btn btn-danger clear-fields"><i class="fa fa-eraser"></i> Clear Fields </a>
-        <a class="btn btn-danger cancel-changes"><i class="fa fa-refresh"></i> Cancel Changes </a>
-        <a class="btn btn-danger cancel-form"><i class="fa fa-trash"></i> Delete {% trans "form_label"|title %} </a>
-    	<a class="btn btn-default save-form-registry"><i class="fa fa-floppy-o"></i> Save {% trans "form_label"|title %} </a>
-        <a href= "{% url 'core_curate_download_xml' data.data_structure.id %}" class="btn btn-default download-registry"><i class="fa fa-download"></i> Download </a>
-        <a class="btn btn-default validate"><i style="color:green;" class="fa fa-check-square"></i> Validate &rarr; Review </a>
+		<button class="btn btn-danger clear-fields"><i class="fa fa-eraser"></i> Clear Fields </button>
+        <button class="btn btn-danger cancel-changes"><i class="fa fa-refresh"></i> Cancel Changes </button>
+        <button class="btn btn-danger cancel-form"><i class="fa fa-trash"></i> Delete {% trans "form_label"|title %} </button>
+    	<button class="btn btn-secondary save-form-registry"><i class="fa fa-floppy-o"></i> Save {% trans "form_label"|title %} </button>
+        <a href= "{% url 'core_curate_download_xml' data.data_structure.id %}" class="btn btn-secondary download-registry"><i class="fa fa-download"></i> Download </a>
+        <button class="btn btn-secondary validate"><i style="color:green;" class="fa fa-check-square"></i> Validate &rarr; Review </button>
 
 	</div>
     <br/><br/>
