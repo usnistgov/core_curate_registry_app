@@ -3,10 +3,10 @@
 <h1>View Data</h1>
 
 <div class="mb-5 float-right">
-    <button class="btn btn-danger mr-auto" href="{% url 'core_curate_enter_data' data.data_structure.id True %}">
-        <i class="fa fa-arrow-left"></i> Back to {% trans "form_label"|title %}</button>
-	<button class="btn btn-secondary mr-auto" href="{% url 'core_curate_download_xml' data.data_structure.id %}">
-        <i class="fa fa-download"></i> Download XML</button>
+    <a class="btn btn-danger mr-auto" href="{% url 'core_curate_enter_data' data.data_structure.id True %}">
+        <i class="fa fa-arrow-left"></i> Back to {% trans "form_label"|title %}</a>
+	<a class="btn btn-secondary mr-auto" href="{% url 'core_curate_download_xml' data.data_structure.id %}">
+        <i class="fa fa-download"></i> Download XML</a>
     {% if data.data_structure.data.workspace.is_public %}
     <button class="btn btn-primary mr-auto save-to-repo"><i class="fa fa-save"></i> Publish</button>
     {% else %}
