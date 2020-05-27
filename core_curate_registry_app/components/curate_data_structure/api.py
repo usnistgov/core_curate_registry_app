@@ -14,4 +14,8 @@ def get_role(curate_data_structure):
     Returns:
 
     """
-    return role_extraction(xml_utils.raw_xml_to_dict(curate_data_structure.form_string, xml_utils.post_processor))
+    return role_extraction(
+        xml_utils.raw_xml_to_dict(
+            curate_data_structure.form_string, xml_utils.post_processor
+        )
+    )

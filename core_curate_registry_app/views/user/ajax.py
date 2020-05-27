@@ -11,8 +11,13 @@ class StartCurate(View):
     """ Start Curate Ajax
     """
 
-    @method_decorator(decorators.permission_required(content_type=rights.curate_content_type,
-                                                     permission=rights.curate_access, raise_exception=True))
+    @method_decorator(
+        decorators.permission_required(
+            content_type=rights.curate_content_type,
+            permission=rights.curate_access,
+            raise_exception=True,
+        )
+    )
     def get(self, request):
         """ Load forms to start curating.
 
@@ -24,8 +29,13 @@ class StartCurate(View):
         """
         return curate_ajax.start_curate(request)
 
-    @method_decorator(decorators.permission_required(content_type=rights.curate_content_type,
-                                                     permission=rights.curate_access, raise_exception=True))
+    @method_decorator(
+        decorators.permission_required(
+            content_type=rights.curate_content_type,
+            permission=rights.curate_access,
+            raise_exception=True,
+        )
+    )
     def post(self, request):
         """ Load forms to start curating.
             Add role to response url.
@@ -38,6 +48,8 @@ class StartCurate(View):
         """
         response = curate_ajax.start_curate(request)
         if response.status_code == 200:
-            role = request.GET.get('role', None)
-            response.content = "{0}?role={1}".format(response.content.decode('utf-8'), role)
+            role = request.GET.get("role", None)
+            response.content = "{0}?role={1}".format(
+                response.content.decode("utf-8"), role
+            )
         return response
