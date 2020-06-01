@@ -1,7 +1,7 @@
 """ Url router for the curate application
 """
 from django.urls import re_path, reverse_lazy
-
+from django.conf.urls import include
 import core_curate_app.permissions.rights as rights
 import core_curate_app.views.user.ajax as user_ajax
 import core_curate_app.views.user.views as user_views
@@ -80,4 +80,5 @@ urlpatterns = [
         )(common_views.FormView.as_view()),
         name="core_curate_view_form",
     ),
+    re_path(r"^rest/", include("core_curate_registry_app.rest.urls")),
 ]
