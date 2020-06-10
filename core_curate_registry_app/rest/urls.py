@@ -5,8 +5,6 @@ from django.urls import re_path
 
 from core_curate_app.rest.curate_data_structure.views import (
     AdminCurateDataStructureList,
-    CurateDataStructureList,
-    CurateDataStructureDetail,
 )
 
 urlpatterns = [
