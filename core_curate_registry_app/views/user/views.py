@@ -28,7 +28,7 @@ from core_curate_registry_app.utils import jquery as jquery_utils
     login_url=reverse_lazy("core_main_app_login"),
 )
 def index(request):
-    """ Curate homepage for the registry.
+    """Curate homepage for the registry.
 
     Args:
         request:
@@ -63,8 +63,7 @@ def index(request):
 
 
 class StartCurate(View):
-    """ Start curate.
-    """
+    """Start curate."""
 
     def __init__(self):
         super(StartCurate, self).__init__()
@@ -88,12 +87,12 @@ class StartCurate(View):
         )
     )
     def get(self, request, role):
-        """ Start curate with role parameter.
-            Args:
-                request:
-                role:
+        """Start curate with role parameter.
+        Args:
+            request:
+            role:
 
-            Returns:
+        Returns:
         """
         try:
             # Get custom resources for the current template

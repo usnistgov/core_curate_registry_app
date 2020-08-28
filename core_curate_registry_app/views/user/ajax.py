@@ -8,8 +8,7 @@ from django.views.generic import View
 
 
 class StartCurate(View):
-    """ Start Curate Ajax
-    """
+    """Start Curate Ajax"""
 
     @method_decorator(
         decorators.permission_required(
@@ -19,12 +18,12 @@ class StartCurate(View):
         )
     )
     def get(self, request):
-        """ Load forms to start curating.
+        """Load forms to start curating.
 
-            Args:
-               request:
+        Args:
+           request:
 
-            Returns:
+        Returns:
 
         """
         return curate_ajax.start_curate(request)
@@ -37,13 +36,13 @@ class StartCurate(View):
         )
     )
     def post(self, request):
-        """ Load forms to start curating.
-            Add role to response url.
+        """Load forms to start curating.
+        Add role to response url.
 
-            Args:
-               request:
+        Args:
+           request:
 
-            Returns:
+        Returns:
 
         """
         response = curate_ajax.start_curate(request)

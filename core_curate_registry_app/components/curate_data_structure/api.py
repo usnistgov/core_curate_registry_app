@@ -6,7 +6,7 @@ from core_main_registry_app.utils.role.extraction import role_extraction
 
 
 def get_role(curate_data_structure):
-    """ Get the role saved in the curate_data_structure's form string
+    """Get the role saved in the curate_data_structure's form string
 
     Args:
         curate_data_structure:
