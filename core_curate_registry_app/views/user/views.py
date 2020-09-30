@@ -198,7 +198,8 @@ class ViewDataRegistryView(ViewDataView):
         )
 
         self.modals = [
-            "core_curate_app/user/data-review/modals/save-form-registry.html"
+            "core_curate_app/user/data-review/modals/save-error.html",
+            "core_curate_app/user/data-review/modals/save-form-registry.html",
         ]
 
     def build_context(self, request, curate_data_structure):
