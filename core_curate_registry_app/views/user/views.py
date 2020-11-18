@@ -46,9 +46,9 @@ def index(request):
     }
 
     # Get custom resources for the current template
-    custom_resources = custom_resource_api.get_all_of_current_template().order_by(
-        "sort"
-    )
+    custom_resources = custom_resource_api.get_all_of_current_template(
+        request=request
+    ).order_by("sort")
 
     return render(
         request,
@@ -96,13 +96,15 @@ class StartCurate(View):
         """
         try:
             # Get custom resources for the current template
-            custom_resource = custom_resource_api.get_by_current_template_and_slug(role)
+            custom_resource = custom_resource_api.get_by_current_template_and_slug(
+                role, request=request
+            )
         except exceptions.DoesNotExist:
             custom_resource = None
 
         context = {
             "template_id": version_manager_api.get_active_global_version_manager_by_title(
-                REGISTRY_XSD_FILENAME
+                REGISTRY_XSD_FILENAME, request=request
             ).current,
             "role": role,
             "custom_resource": custom_resource,
@@ -157,7 +159,7 @@ class EnterDataRegistryView(EnterDataView):
             try:
                 # Get custom resources for the current template
                 custom_resource = custom_resource_api.get_by_current_template_and_slug(
-                    role
+                    role, request=request
                 )
             except exceptions.DoesNotExist:
                 custom_resource = None
