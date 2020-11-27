@@ -1,12 +1,16 @@
 """Curate registry app user views
 """
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views import View
 
 import core_curate_app.permissions.rights as rights
 import core_main_app.utils.decorators as decorators
 from core_curate_app.views.user.views import EnterDataView
 from core_curate_app.views.user.views import ViewDataView
-from core_explore_keyword_registry_app.settings import REGISTRY_XSD_FILENAME
+from core_curate_registry_app.settings import REGISTRY_XSD_FILENAME
+from core_curate_registry_app.settings import XPATH_TITLE
+from core_curate_registry_app.utils import jquery as jquery_utils
 from core_main_app.commons import exceptions
 from core_main_app.components.version_manager import api as version_manager_api
 from core_main_app.utils.rendering import render
@@ -15,11 +19,6 @@ from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
 from core_parser_app.components.data_structure_element import (
     api as data_structure_element_api,
 )
-from django.utils.decorators import method_decorator
-from django.views import View
-
-from core_curate_registry_app.settings import XPATH_TITLE
-from core_curate_registry_app.utils import jquery as jquery_utils
 
 
 @decorators.permission_required(
@@ -165,7 +164,7 @@ class EnterDataRegistryView(EnterDataView):
                 custom_resource = None
 
             list_data_structure_element = data_structure_element_api.get_by_xpath(
-                XPATH_TITLE
+                XPATH_TITLE, request
             )
             list_data_structure_element = list(list_data_structure_element)
             data_id_list = []
