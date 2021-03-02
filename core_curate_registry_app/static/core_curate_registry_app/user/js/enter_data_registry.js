@@ -21,7 +21,7 @@ var sendSaveRequest = function() {
  * Notify the download
  */
 var downloadMessage = function() {
-    $.notify("Download in progress", "info");
+    $.notify("Download in progress", {style: "info"});
 };
 
 /**
