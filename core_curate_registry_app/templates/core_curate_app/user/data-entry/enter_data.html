@@ -3,7 +3,7 @@
 <div class="title-page">
     <h3>
         {% if data.role_choice %}
-        <i class="fa {{data.icon}}" style="color: {{data.icon_color}};" aria-hidden="true"></i>
+        <i class="fas {{data.icon}}" style="color: {{data.icon_color}};" aria-hidden="true"></i>
            {% if data.edit %}Edit{% else %}Add a new{% endif %} {{data.role_choice}}
         {% else %}
         {% if data.edit %}Edit{% else %}Add new{% endif %} Resource
@@ -13,12 +13,12 @@
 
 <div class="toolbar">
 	<div class="float-right">
-		<button class="btn btn-danger clear-fields mr-auto"><i class="fa fa-eraser"></i> Clear Fields </button>
-        <button class="btn btn-danger cancel-changes mr-auto"><i class="fa fa-sync"></i> Cancel Changes </button>
-        <button class="btn btn-danger cancel-form mr-auto"><i class="fa fa-trash"></i> Delete {% trans "form_label"|title %} </button>
-    	<button class="btn btn-secondary save-form-registry mr-auto"><i class="fa fa-save"></i> Save {% trans "form_label"|title %} </button>
-        <a href= "{% url 'core_curate_download_xml' data.data_structure.id %}" class="btn btn-secondary download-registry mr-auto"><i class="fa fa-download"></i> Download </a>
-        <button class="btn btn-primary validate"><i class="fa fa-check-square"></i> Validate &rarr; Review </button>
+		<button class="btn btn-danger clear-fields mr-auto"><i class="fas fa-eraser"></i> Clear Fields </button>
+        <button class="btn btn-danger cancel-changes mr-auto"><i class="fas fa-sync"></i> Cancel Changes </button>
+        <button class="btn btn-danger cancel-form mr-auto"><i class="fas fa-trash"></i> Delete {% trans "form_label"|title %} </button>
+    	<button class="btn btn-secondary save-form-registry mr-auto"><i class="fas fa-save"></i> Save {% trans "form_label"|title %} </button>
+        <a href= "{% url 'core_curate_download_xml' data.data_structure.id %}" class="btn btn-secondary download-registry mr-auto"><i class="fas fa-download"></i> Download </a>
+        <button class="btn btn-primary validate"><i class="fas fa-check-square"></i> Validate &rarr; Review </button>
 
 	</div>
     <br/><br/>
