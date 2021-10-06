@@ -12,7 +12,9 @@ from core_curate_registry_app.settings import REGISTRY_XSD_FILENAME
 from core_curate_registry_app.settings import XPATH_TITLE
 from core_curate_registry_app.utils import jquery as jquery_utils
 from core_main_app.commons import exceptions
-from core_main_app.components.version_manager import api as version_manager_api
+from core_main_app.components.template_version_manager import (
+    api as template_version_manager_api,
+)
 from core_main_app.utils.rendering import render
 from core_main_registry_app.components.custom_resource import api as custom_resource_api
 from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
@@ -102,7 +104,7 @@ class StartCurate(View):
             custom_resource = None
 
         context = {
-            "template_id": version_manager_api.get_active_global_version_manager_by_title(
+            "template_id": template_version_manager_api.get_active_global_version_manager_by_title(
                 REGISTRY_XSD_FILENAME, request=request
             ).current,
             "role": role,
@@ -169,7 +171,7 @@ class EnterDataRegistryView(EnterDataView):
             list_data_structure_element = list(list_data_structure_element)
             data_id_list = []
             for i in range(len(list_data_structure_element)):
-                data_id_list.append(list_data_structure_element[i]["id"])
+                data_id_list.append(str(list_data_structure_element[i].id))
             jquery_selector = jquery_utils.get_jquery_selector_from_data_structure(
                 data_id_list
             )

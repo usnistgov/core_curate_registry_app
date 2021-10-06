@@ -1,10 +1,11 @@
 """Curate registry app user ajax
 """
+from django.utils.decorators import method_decorator
+from django.views.generic import View
+
 import core_curate_app.permissions.rights as rights
 import core_main_app.utils.decorators as decorators
 from core_curate_app.views.user import ajax as curate_ajax
-from django.utils.decorators import method_decorator
-from django.views.generic import View
 
 
 class StartCurate(View):

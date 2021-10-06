@@ -4,9 +4,6 @@
 from unittest.case import TestCase
 
 from core_curate_registry_app.utils import jquery
-from core_parser_app.components.data_structure_element.models import (
-    DataStructureElement,
-)
 
 
 class TestUtilsGetJqueryFromDataStructureElement(TestCase):

@@ -1,7 +1,8 @@
 """ Url router for the curate application
 """
-from django.urls import re_path, reverse_lazy
 from django.conf.urls import include
+from django.urls import re_path, reverse_lazy
+
 import core_curate_app.permissions.rights as rights
 import core_curate_app.views.user.ajax as user_ajax
 import core_curate_app.views.user.views as user_views
