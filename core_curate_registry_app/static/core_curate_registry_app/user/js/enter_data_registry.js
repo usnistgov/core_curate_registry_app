@@ -3,6 +3,10 @@
  */
 var sendSaveRequest = function() {
     $("#save-form-modal").modal("hide");
+    var icon = $(".save-form-registry > i").attr("class");
+
+    // Show loading spinner
+    showSpinner($(".save-form-registry > i"));
     var objectID = $("#curate_data_structure_id").html();
     $.ajax({
         url: saveFormUrl,
@@ -14,6 +18,9 @@ var sendSaveRequest = function() {
         success: function(data) {
             $.notify(data.message, { style: data.tags });
         },
+    }).always(function(data) {
+        // get old button icon
+        hideSpinner($(".save-form-registry > i"),icon);
     });
 };
 

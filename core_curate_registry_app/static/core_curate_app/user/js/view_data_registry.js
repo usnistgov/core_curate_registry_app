@@ -24,6 +24,9 @@ var displaySaveForm = function(){
  */
 var saveToRepositoryRegistry = function(){
    var objectID = $("#curate_data_structure_id").html();
+   var icon = $(".btn.save-to-repo-registry").attr("class");
+
+   showSpinner($(".btn.save-to-repo-registry > i"));
    $.ajax({
         url : saveDataUrl,
         type: 'POST',
@@ -39,6 +42,9 @@ var saveToRepositoryRegistry = function(){
         error: function(data){
             XMLDataSavedError(data.responseText);
         }
+    }).always(function(data) {
+        // get old button icon
+        hideSpinner($(".btn.save-to-repo-registry > i"),icon)
     });
 };
 
@@ -57,7 +63,7 @@ var XMLDataSavedError = function(errors){
  */
 function publish(){
    var objectID = $("#data_id").html() ;
-
+    showSpinner($(".publish > i"));
     $.ajax({
         url : publishUrl,
         type : "POST",
