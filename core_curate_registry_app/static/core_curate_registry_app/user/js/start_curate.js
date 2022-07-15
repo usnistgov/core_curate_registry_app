@@ -1,7 +1,11 @@
 $(document).ready(function(){
     load_start_form($("#template_id").html());
-    $('#btn-display-data').on('click', displayTemplateProcess);
-        var MAX_INTERVAL_ITER = 5000;
+    $('#btn-display-data').on('click', function(){
+        // start regular form processing
+        displayTemplateProcess($("#btn-display-data > i"));
+
+    });
+    var MAX_INTERVAL_ITER = 5000;
     var iteration = 0;
 
     var interval = setInterval(function() {
