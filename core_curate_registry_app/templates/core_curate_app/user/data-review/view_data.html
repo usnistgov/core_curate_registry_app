@@ -5,8 +5,7 @@
 <div class="mb-5 float-right">
     <a class="btn btn-danger mr-auto" href="{% url 'core_curate_enter_data' data.data_structure.id True %}">
         <i class="fas fa-arrow-left"></i> Back to {% trans "form_label"|title %}</a>
-	<a class="btn btn-secondary mr-auto" href="{% url 'core_curate_download_xml' data.data_structure.id %}">
-        <i class="fas fa-download"></i> Download XML</a>
+	<button class="btn btn-secondary download mr-auto"><i class="fas fa-download"></i> Download </button>
     {% if data.data_structure.data.workspace.is_public %}
     <button class="btn btn-primary mr-auto save-to-repo"><i class="fas fa-save"></i> Publish</button>
     {% else %}
