@@ -24,7 +24,7 @@ var displaySaveForm = function(){
  */
 var saveToRepositoryRegistry = function(){
    var objectID = $("#curate_data_structure_id").html();
-   var icon = $(".btn.save-to-repo-registry").attr("class");
+   var icon = $(".btn.save-to-repo-registry > i").attr("class");
 
    showSpinner($(".btn.save-to-repo-registry > i"));
    $.ajax({
