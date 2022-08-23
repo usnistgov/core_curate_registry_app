@@ -3,8 +3,8 @@
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-import core_curate_app.permissions.rights as rights
-import core_main_app.utils.decorators as decorators
+from core_curate_app.permissions import rights
+from core_main_app.utils import decorators
 from core_curate_app.views.user import ajax as curate_ajax
 
 
@@ -13,8 +13,8 @@ class StartCurate(View):
 
     @method_decorator(
         decorators.permission_required(
-            content_type=rights.curate_content_type,
-            permission=rights.curate_access,
+            content_type=rights.CURATE_CONTENT_TYPE,
+            permission=rights.CURATE_ACCESS,
             raise_exception=True,
         )
     )
@@ -31,8 +31,8 @@ class StartCurate(View):
 
     @method_decorator(
         decorators.permission_required(
-            content_type=rights.curate_content_type,
-            permission=rights.curate_access,
+            content_type=rights.CURATE_CONTENT_TYPE,
+            permission=rights.CURATE_ACCESS,
             raise_exception=True,
         )
     )
