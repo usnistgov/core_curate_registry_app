@@ -48,8 +48,8 @@ class StartCurate(View):
         """
         response = curate_ajax.start_curate(request)
         if response.status_code == 200:
-            role = request.GET.get("role", None)
-            response.content = "{0}?role={1}".format(
-                response.content.decode("utf-8"), role
-            )
+            response_content = response.content.decode("utf-8")
+            if "enter-data" in response_content:
+                role = request.GET.get("role", None)
+                response.content = f"{response_content}?role={role}"
         return response
