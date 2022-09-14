@@ -1,10 +1,11 @@
 """Curate registry app user ajax
 """
-import core_curate_app.permissions.rights as rights
-import core_main_app.utils.decorators as decorators
-from core_curate_app.views.user import ajax as curate_ajax
 from django.utils.decorators import method_decorator
 from django.views.generic import View
+
+from core_curate_app.permissions import rights
+from core_main_app.utils import decorators
+from core_curate_app.views.user import ajax as curate_ajax
 
 
 class StartCurate(View):
@@ -12,8 +13,8 @@ class StartCurate(View):
 
     @method_decorator(
         decorators.permission_required(
-            content_type=rights.curate_content_type,
-            permission=rights.curate_access,
+            content_type=rights.CURATE_CONTENT_TYPE,
+            permission=rights.CURATE_ACCESS,
             raise_exception=True,
         )
     )
@@ -30,8 +31,8 @@ class StartCurate(View):
 
     @method_decorator(
         decorators.permission_required(
-            content_type=rights.curate_content_type,
-            permission=rights.curate_access,
+            content_type=rights.CURATE_CONTENT_TYPE,
+            permission=rights.CURATE_ACCESS,
             raise_exception=True,
         )
     )
@@ -47,8 +48,8 @@ class StartCurate(View):
         """
         response = curate_ajax.start_curate(request)
         if response.status_code == 200:
-            role = request.GET.get("role", None)
-            response.content = "{0}?role={1}".format(
-                response.content.decode("utf-8"), role
-            )
+            response_content = response.content.decode("utf-8")
+            if "enter-data" in response_content:
+                role = request.GET.get("role", None)
+                response.content = f"{response_content}?role={role}"
         return response

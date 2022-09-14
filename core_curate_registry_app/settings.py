@@ -20,5 +20,5 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, "core_curate_registry_app/locale"),)
 
 
 XPATH_TITLE = "/rsm:Resource[1]/rsm:identity[1]/rsm:title"
-""" str : Xpath of the resource name/title 
+""" str : Xpath of the resource name/title
 """

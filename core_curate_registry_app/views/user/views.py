@@ -4,26 +4,27 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 
-import core_curate_app.permissions.rights as rights
-import core_main_app.utils.decorators as decorators
-from core_curate_app.views.user.views import EnterDataView
-from core_curate_app.views.user.views import ViewDataView
-from core_curate_registry_app.settings import REGISTRY_XSD_FILENAME
-from core_curate_registry_app.settings import XPATH_TITLE
-from core_curate_registry_app.utils import jquery as jquery_utils
-from core_main_app.commons import exceptions
-from core_main_app.components.version_manager import api as version_manager_api
+from core_main_app.utils import decorators
 from core_main_app.utils.rendering import render
-from core_main_registry_app.components.custom_resource import api as custom_resource_api
-from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
+from core_main_app.commons import exceptions
+from core_main_app.components.template_version_manager import (
+    api as template_version_manager_api,
+)
+from core_curate_app.permissions import rights
+from core_curate_app.views.user.views import EnterDataView, ViewDataView
 from core_parser_app.components.data_structure_element import (
     api as data_structure_element_api,
 )
 
+from core_main_registry_app.components.custom_resource import api as custom_resource_api
+from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
+from core_curate_registry_app.settings import REGISTRY_XSD_FILENAME, XPATH_TITLE
+from core_curate_registry_app.utils import jquery as jquery_utils
+
 
 @decorators.permission_required(
-    content_type=rights.curate_content_type,
-    permission=rights.curate_access,
+    content_type=rights.CURATE_CONTENT_TYPE,
+    permission=rights.CURATE_ACCESS,
     login_url=reverse_lazy("core_main_app_login"),
 )
 def index(request):
@@ -65,7 +66,7 @@ class StartCurate(View):
     """Start curate."""
 
     def __init__(self):
-        super(StartCurate, self).__init__()
+        super().__init__()
         self.assets = {
             "js": [
                 {"path": "core_curate_app/user/js/select_template.js", "is_raw": False},
@@ -80,8 +81,8 @@ class StartCurate(View):
 
     @method_decorator(
         decorators.permission_required(
-            content_type=rights.curate_content_type,
-            permission=rights.curate_access,
+            content_type=rights.CURATE_CONTENT_TYPE,
+            permission=rights.CURATE_ACCESS,
             login_url=reverse_lazy("core_main_app_login"),
         )
     )
@@ -102,7 +103,7 @@ class StartCurate(View):
             custom_resource = None
 
         context = {
-            "template_id": version_manager_api.get_active_global_version_manager_by_title(
+            "template_id": template_version_manager_api.get_active_global_version_manager_by_title(
                 REGISTRY_XSD_FILENAME, request=request
             ).current,
             "role": role,
@@ -118,8 +119,10 @@ class StartCurate(View):
 
 
 class EnterDataRegistryView(EnterDataView):
+    """Enter Data Registry View."""
+
     def __init__(self):
-        super(EnterDataRegistryView, self).__init__()
+        super().__init__()
         self.assets["js"].extend(
             (
                 {"path": "core_curate_registry_app/user/js/role.js", "is_raw": False},
@@ -139,10 +142,20 @@ class EnterDataRegistryView(EnterDataView):
         )
 
     def build_context(self, request, curate_data_structure, reload_unsaved_changes):
+        """Build the context of the view
+
+        Args:
+            request:
+            curate_data_structure:
+            reload_unsaved_changes:
+
+        Returns:
+
+        """
         # get the role before module initialization
         role = request.GET.get("role", None)
         # build context
-        context = super(EnterDataRegistryView, self).build_context(
+        context = super().build_context(
             request, curate_data_structure, reload_unsaved_changes
         )
 
@@ -169,7 +182,7 @@ class EnterDataRegistryView(EnterDataView):
             list_data_structure_element = list(list_data_structure_element)
             data_id_list = []
             for i in range(len(list_data_structure_element)):
-                data_id_list.append(list_data_structure_element[i]["id"])
+                data_id_list.append(str(list_data_structure_element[i].id))
             jquery_selector = jquery_utils.get_jquery_selector_from_data_structure(
                 data_id_list
             )
@@ -192,8 +205,10 @@ class EnterDataRegistryView(EnterDataView):
 
 
 class ViewDataRegistryView(ViewDataView):
+    """View Data Registry."""
+
     def __init__(self):
-        super(ViewDataRegistryView, self).__init__()
+        super().__init__()
         self.assets["js"].append(
             {"path": "core_curate_app/user/js/view_data_registry.js", "is_raw": False}
         )
@@ -205,8 +220,15 @@ class ViewDataRegistryView(ViewDataView):
         ]
 
     def build_context(self, request, curate_data_structure):
+        """Build the context of the view
 
-        context = super(ViewDataRegistryView, self).build_context(
-            request, curate_data_structure
-        )
+        Args:
+            request:
+            curate_data_structure:
+
+        Returns:
+
+        """
+
+        context = super().build_context(request, curate_data_structure)
         return context

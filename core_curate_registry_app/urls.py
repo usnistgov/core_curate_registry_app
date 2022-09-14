@@ -1,14 +1,15 @@
 """ Url router for the curate application
 """
-from django.urls import re_path, reverse_lazy
 from django.conf.urls import include
-import core_curate_app.permissions.rights as rights
+from django.urls import re_path, reverse_lazy
+
+from core_curate_app.permissions import rights
 import core_curate_app.views.user.ajax as user_ajax
 import core_curate_app.views.user.views as user_views
-import core_curate_registry_app.views.user.ajax as user_registry_ajax
-import core_curate_registry_app.views.user.views as user_registry_views
 from core_curate_app.views.common import views as common_views
 from core_main_app.utils.decorators import permission_required
+import core_curate_registry_app.views.user.views as user_registry_views
+import core_curate_registry_app.views.user.ajax as user_registry_ajax
 
 urlpatterns = [
     re_path(r"^$", user_registry_views.index, name="core_curate_index"),
@@ -27,7 +28,8 @@ urlpatterns = [
         user_registry_views.EnterDataRegistryView.as_view(),
         name="core_curate_enter_data",
     ),
-    # FIXME: url to allow reopening a form with unsaved changes (may be temporary until curate workflow redesign)
+    # FIXME: url to allow reopening a form with unsaved changes
+    #  (may be temporary until curate workflow redesign)
     re_path(
         r"^enter-data/(?P<curate_data_structure_id>\w+)/(?P<reload_unsaved_changes>\w+)$",
         user_registry_views.EnterDataRegistryView.as_view(),
@@ -74,8 +76,8 @@ urlpatterns = [
     re_path(
         r"^view-form/(?P<curate_data_structure_id>\w+)$",
         permission_required(
-            content_type=rights.curate_content_type,
-            permission=rights.curate_access,
+            content_type=rights.CURATE_CONTENT_TYPE,
+            permission=rights.CURATE_ACCESS,
             login_url=reverse_lazy("core_main_app_login"),
         )(common_views.FormView.as_view()),
         name="core_curate_view_form",

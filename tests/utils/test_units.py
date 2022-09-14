@@ -4,13 +4,19 @@
 from unittest.case import TestCase
 
 from core_curate_registry_app.utils import jquery
-from core_parser_app.components.data_structure_element.models import (
-    DataStructureElement,
-)
 
 
 class TestUtilsGetJqueryFromDataStructureElement(TestCase):
+    """Test Utils Get Jquery From Data Structure Element."""
+
     def test_utils_get_jquery_from_data_structure_element_returns_data(self):
+        """test_utils_get_jquery_from_data_structure_element_returns_data.
+
+        Args:
+
+        Returns:
+
+        """
         # Arrange
         string_expected = ".element1,.element2,.element3"
         object1 = "element1"
@@ -23,6 +29,13 @@ class TestUtilsGetJqueryFromDataStructureElement(TestCase):
         self.assertEqual(string_expected, result)
 
     def test_utils_get_jquery_from_data_structure_element_returns_empty(self):
+        """test_utils_get_jquery_from_data_structure_element_returns_empty.
+
+        Args:
+
+        Returns:
+
+        """
         # Arrange
         data_list = []
         string_expected = ""
@@ -32,6 +45,13 @@ class TestUtilsGetJqueryFromDataStructureElement(TestCase):
         self.assertEqual(string_expected, result)
 
     def test_utils_get_jquery_from_data_structure_element_returns_one_element(self):
+        """test_utils_get_jquery_from_data_structure_element_returns_one_element.
+
+        Args:
+
+        Returns:
+
+        """
         # Arrange
         object1 = "element1"
         string_expected = ".element1"
