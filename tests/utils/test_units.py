@@ -44,7 +44,9 @@ class TestUtilsGetJqueryFromDataStructureElement(TestCase):
         # Assert
         self.assertEqual(string_expected, result)
 
-    def test_utils_get_jquery_from_data_structure_element_returns_one_element(self):
+    def test_utils_get_jquery_from_data_structure_element_returns_one_element(
+        self,
+    ):
         """test_utils_get_jquery_from_data_structure_element_returns_one_element.
 
         Args:
