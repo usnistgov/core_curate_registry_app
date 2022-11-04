@@ -68,6 +68,7 @@ def index(request):
             "custom_resources": custom_resources,
             "display_not_resource": False,
             "type_resource": CUSTOM_RESOURCE_TYPE.RESOURCE.value,
+            "page_title": "Publish Resource",
         },
     )
 
@@ -123,6 +124,7 @@ class StartCurate(View):
             ).current,
             "role": role,
             "custom_resource": custom_resource,
+            "page_title": "Publish Resource",
         }
         return render(
             request,
