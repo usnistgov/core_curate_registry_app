@@ -62,7 +62,9 @@ var XMLDataSavedError = function(errors){
  * Publish the data
  */
 function publish(){
-   var objectID = $("#data_id").html() ;
+    var objectID = $("#data_id").html();
+    var icon = $(".publish > i").attr("class");
+
     showSpinner($(".publish > i"));
     $.ajax({
         url : publishUrl,
@@ -75,6 +77,7 @@ function publish(){
             window.location = curateIndexUrl;
         },
         error:function(data){
+            hideSpinner($("publish > i"), icon)
             var myArr = JSON.parse(data.responseText);
             $.notify(myArr.message, {style: myArr.tags });
         }
