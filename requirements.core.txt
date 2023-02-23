@@ -1,2 +1,2 @@
-core-curate-app==2.2.*
-core-main-registry-app==2.2.*
+core-curate-app==2.3.*
+core-main-registry-app==2.3.*
