@@ -1,15 +1,15 @@
 """ Url router for the curate application
 """
 from django.conf.urls import include
-from django.urls import re_path, reverse_lazy
+from django.urls import re_path
 
-from core_curate_app.permissions import rights
 import core_curate_app.views.user.ajax as user_ajax
 import core_curate_app.views.user.views as user_views
+import core_curate_registry_app.views.user.ajax as user_registry_ajax
+import core_curate_registry_app.views.user.views as user_registry_views
+from core_curate_app.permissions import rights
 from core_curate_app.views.common import views as common_views
 from core_main_app.utils.decorators import permission_required
-import core_curate_registry_app.views.user.views as user_registry_views
-import core_curate_registry_app.views.user.ajax as user_registry_ajax
 
 urlpatterns = [
     re_path(r"^$", user_registry_views.index, name="core_curate_index"),
@@ -90,7 +90,6 @@ urlpatterns = [
         permission_required(
             content_type=rights.CURATE_CONTENT_TYPE,
             permission=rights.CURATE_ACCESS,
-            login_url=reverse_lazy("core_main_app_login"),
         )(common_views.FormView.as_view()),
         name="core_curate_view_form",
     ),
@@ -99,7 +98,6 @@ urlpatterns = [
         permission_required(
             content_type=rights.CURATE_CONTENT_TYPE,
             permission=rights.CURATE_DATA_STRUCTURE_ACCESS,
-            login_url=reverse_lazy("core_main_app_login"),
         )(common_views.DraftContentEditor.as_view()),
         name="core_curate_app_xml_text_editor_view",
     ),

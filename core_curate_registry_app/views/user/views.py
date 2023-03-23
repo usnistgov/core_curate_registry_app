@@ -1,36 +1,33 @@
 """Curate registry app user views
 """
-from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from core_main_app.utils import decorators
-from core_main_app.utils.rendering import render
-from core_main_app.commons import exceptions
-from core_main_app.components.template_version_manager import (
-    api as template_version_manager_api,
-)
 from core_curate_app.permissions import rights
 from core_curate_app.views.user.views import EnterDataView, ViewDataView
-from core_parser_app.components.data_structure_element import (
-    api as data_structure_element_api,
-)
-
-from core_main_registry_app.components.custom_resource import (
-    api as custom_resource_api,
-)
-from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
 from core_curate_registry_app.settings import (
     REGISTRY_XSD_FILENAME,
     XPATH_TITLE,
 )
 from core_curate_registry_app.utils import jquery as jquery_utils
+from core_main_app.commons import exceptions
+from core_main_app.components.template_version_manager import (
+    api as template_version_manager_api,
+)
+from core_main_app.utils import decorators
+from core_main_app.utils.rendering import render
+from core_main_registry_app.components.custom_resource import (
+    api as custom_resource_api,
+)
+from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
+from core_parser_app.components.data_structure_element import (
+    api as data_structure_element_api,
+)
 
 
 @decorators.permission_required(
     content_type=rights.CURATE_CONTENT_TYPE,
     permission=rights.CURATE_ACCESS,
-    login_url=reverse_lazy("core_main_app_login"),
 )
 def index(request):
     """Curate homepage for the registry.
@@ -97,7 +94,6 @@ class StartCurate(View):
         decorators.permission_required(
             content_type=rights.CURATE_CONTENT_TYPE,
             permission=rights.CURATE_ACCESS,
-            login_url=reverse_lazy("core_main_app_login"),
         )
     )
     def get(self, request, role):
