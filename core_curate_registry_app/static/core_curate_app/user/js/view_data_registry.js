@@ -79,7 +79,7 @@ function publish(){
         error:function(data){
             hideSpinner($("publish > i"), icon)
             var myArr = JSON.parse(data.responseText);
-            $.notify(myArr.message, {style: myArr.tags });
+            $.notify(myArr.message, "danger");
         }
     });
 }

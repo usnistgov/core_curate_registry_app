@@ -16,7 +16,7 @@ var sendSaveRequest = function() {
         },
         dataType: 'json',
         success: function(data) {
-            $.notify(data.message, { style: data.tags });
+            $.notify(data.message, "success");
         },
     }).always(function(data) {
         // get old button icon
@@ -28,7 +28,7 @@ var sendSaveRequest = function() {
  * Notify the download
  */
 var downloadMessage = function() {
-    $.notify("Download in progress", {style: "info"});
+    $.notify("Download in progress", "info");
 };
 
 /**
