@@ -13,7 +13,7 @@ This document is saved as unpublished, do you want to publish it?
         <div class="row">
             <div class="col-8">
                 <div class="d-flex justify-content-start">
-                    <a class="btn btn-danger mr-1" href="{% url 'core_curate_index' %}">
+                    <a class="btn btn-danger {% if BOOTSTRAP_VERSION == "4.6.2" %}mr-1{% elif BOOTSTRAP_VERSION == "5.1.3" %}me-1{% endif %}" href="{% url 'core_curate_index' %}">
                         <i class="fas fa-home"></i> No, go to curate page
                     </a>
                     <a class="btn btn-danger" href="{% url 'core_dashboard_records' %}">
