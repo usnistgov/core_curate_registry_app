@@ -1,5 +1,8 @@
 """ Url router for the curate application
 """
+from core_curate_app.rest.curate_data_structure.views import (
+    CurateDataStructureDetail,
+)
 from django.conf.urls import include
 from django.urls import re_path
 
@@ -100,6 +103,11 @@ urlpatterns = [
             permission=rights.CURATE_DATA_STRUCTURE_ACCESS,
         )(common_views.DraftContentEditor.as_view()),
         name="core_curate_app_xml_text_editor_view",
+    ),
+    re_path(
+        r"^draft/(?P<pk>\w+)/$",
+        CurateDataStructureDetail.as_view(),
+        name="core_curate_app_rest_draft_detail",
     ),
     re_path(r"^rest/", include("core_curate_registry_app.rest.urls")),
 ]

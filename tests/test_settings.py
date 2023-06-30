@@ -12,6 +12,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sites",
     # Local apps
+    "core_main_app",
+    "core_main_registry_app",
+    "core_parser_app",
+    "core_curate_app",
     "tests",
 ]
 
@@ -37,5 +41,7 @@ TEMPLATES = [
         },
     },
 ]
+ROOT_URLCONF = "core_curate_registry_app.urls"
 MONGODB_INDEXING = False
 MONGODB_ASYNC_SAVE = False
+CELERYBEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
