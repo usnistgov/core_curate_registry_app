@@ -1,8 +1,5 @@
 """ Url router for the curate application
 """
-from core_curate_app.rest.curate_data_structure.views import (
-    CurateDataStructureDetail,
-)
 from django.conf.urls import include
 from django.urls import re_path
 
@@ -11,7 +8,11 @@ import core_curate_app.views.user.views as user_views
 import core_curate_registry_app.views.user.ajax as user_registry_ajax
 import core_curate_registry_app.views.user.views as user_registry_views
 from core_curate_app.permissions import rights
+from core_curate_app.rest.curate_data_structure.views import (
+    CurateDataStructureDetail,
+)
 from core_curate_app.views.common import views as common_views
+from core_curate_registry_app.settings import ALLOW_MULTIPLE_SCHEMAS
 from core_main_app.utils.decorators import permission_required
 
 urlpatterns = [
@@ -119,3 +120,12 @@ urlpatterns = [
     ),
     re_path(r"^rest/", include("core_curate_registry_app.rest.urls")),
 ]
+
+if ALLOW_MULTIPLE_SCHEMAS:
+    urlpatterns.append(
+        re_path(
+            r"^other/$",
+            user_registry_views.start_curate_other_resources,
+            name="core_curate_other_resources_index",
+        ),
+    )

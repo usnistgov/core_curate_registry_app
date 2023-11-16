@@ -45,3 +45,4 @@ ROOT_URLCONF = "core_curate_registry_app.urls"
 MONGODB_INDEXING = False
 MONGODB_ASYNC_SAVE = False
 CELERYBEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+ALLOW_MULTIPLE_SCHEMAS = True

@@ -8,6 +8,7 @@ from core_curate_app.views.user.views import EnterDataView, ViewDataView
 from core_curate_registry_app.settings import (
     REGISTRY_XSD_FILENAME,
     XPATH_TITLE,
+    ALLOW_MULTIPLE_SCHEMAS,
 )
 from core_curate_registry_app.utils import jquery as jquery_utils
 from core_main_app.commons import exceptions
@@ -18,6 +19,9 @@ from core_main_app.utils import decorators
 from core_main_app.utils.rendering import render
 from core_main_registry_app.components.custom_resource import (
     api as custom_resource_api,
+)
+from core_main_registry_app.components.template import (
+    api as template_registry_api,
 )
 from core_main_registry_app.constants import CUSTOM_RESOURCE_TYPE
 from core_parser_app.components.data_structure_element import (
@@ -66,6 +70,7 @@ def index(request):
             "display_not_resource": False,
             "type_resource": CUSTOM_RESOURCE_TYPE.RESOURCE.value,
             "page_title": "Publish Resource",
+            "ALLOW_MULTIPLE_SCHEMAS": ALLOW_MULTIPLE_SCHEMAS,
         },
     )
 
@@ -124,7 +129,7 @@ class StartCurate(View):
         }
         return render(
             request,
-            "core_curate_app/user/curate.html",
+            "core_curate_registry_app/user/curate.html",
             assets=self.assets,
             modals=self.modals,
             context=context,
@@ -260,3 +265,64 @@ class ViewDataRegistryView(ViewDataView):
 
         context = super().build_context(request, curate_data_structure)
         return context
+
+
+@decorators.permission_required(
+    content_type=rights.CURATE_CONTENT_TYPE,
+    permission=rights.CURATE_ACCESS,
+)
+def start_curate_other_resources(request):
+    """Page that allows to select a template to start curating.
+
+    Args:
+        request:
+
+    Returns:
+
+    """
+    assets = {
+        "js": [
+            {
+                "path": "core_curate_app/user/js/select_template.js",
+                "is_raw": False,
+            },
+            {
+                "path": "core_curate_app/user/js/select_template.raw.js",
+                "is_raw": True,
+            },
+            {
+                "path": "core_curate_registry_app/user/js/start_curate.js",
+                "is_raw": False,
+            },
+        ],
+        "css": [
+            "core_curate_app/user/css/common.css",
+            "core_curate_app/user/css/style.css",
+        ],
+    }
+
+    registry_template = template_registry_api.get_current_registry_template(
+        request
+    )
+    global_active_template_list = (
+        template_version_manager_api.get_active_global_version_manager(
+            request=request
+        )
+    )
+    other_templates = global_active_template_list.exclude(
+        id=registry_template.id
+    )
+
+    context = {
+        "templates_version_manager": other_templates,
+    }
+
+    # Set page title
+    context.update({"page_title": "Curate"})
+
+    return render(
+        request,
+        "core_curate_app/user/curate.html",
+        assets=assets,
+        context=context,
+    )

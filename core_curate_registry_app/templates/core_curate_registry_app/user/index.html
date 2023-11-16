@@ -14,3 +14,11 @@
         </p>
     {% endif %}
 {% endfor %}
+
+{% if data.ALLOW_MULTIPLE_SCHEMAS %}
+<p>
+    <a href="{% url 'core_curate_other_resources_index' %}">
+        Other Resources</a> -
+    A set of additional metadata documents hosted on the registry.
+</p>
+{% endif %}
