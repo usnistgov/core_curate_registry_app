@@ -21,6 +21,6 @@ class TestUrls(TestCase):
 
         """
         url = reverse("core_curate_app_rest_draft_detail", args=[1])
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class, CurateDataStructureDetail
         )
