@@ -1,5 +1,6 @@
 """ Curate Data Structure registry api
 """
+
 from core_main_app.settings import XML_POST_PROCESSOR, XML_FORCE_LIST
 from core_main_app.utils import xml as xml_utils
 

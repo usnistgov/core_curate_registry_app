@@ -1,5 +1,6 @@
 """ Unit test user views
 """
+
 from unittest.mock import patch
 
 from django.test import SimpleTestCase, RequestFactory

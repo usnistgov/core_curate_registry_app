@@ -1,5 +1,6 @@
 """ Urls test class
 """
+
 from unittest import TestCase
 
 from core_curate_app.rest.curate_data_structure.views import (
