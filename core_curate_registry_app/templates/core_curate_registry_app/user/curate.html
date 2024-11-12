@@ -1,13 +1,13 @@
 {% load static %}
 
-<div class="title-page">
+<h1>
 {% if data.custom_resource %}
 <i class="fas {{data.custom_resource.icon}}" style="color: {{data.custom_resource.icon_color}};" aria-hidden="true"></i>
     Add a new {{data.custom_resource.title}}
 {% else %}
 Add a new Resource
 {% endif %}
-</div>
+</h1>
 
 <br/>
 <div id ="role_title" style="display: none;">

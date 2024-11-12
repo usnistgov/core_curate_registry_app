@@ -1,15 +1,13 @@
 {% load i18n %}
 
-<div class="title-page">
-    <h3>
-        {% if data.role_choice %}
-        <i class="fas {{data.icon}}" style="color: {{data.icon_color}};" aria-hidden="true"></i>
-           {% if data.edit %}Edit{% else %}Add a new{% endif %} {{data.role_choice}}
-        {% else %}
-        {% if data.edit %}Edit{% else %}Add new{% endif %} Resource
-        {% endif %}
-    </h3>
-</div>
+<h1>
+    {% if data.role_choice %}
+    <i class="fas {{data.icon}}" style="color: {{data.icon_color}};" aria-hidden="true"></i>
+       {% if data.edit %}Edit{% else %}Add a new{% endif %} {{data.role_choice}}
+    {% else %}
+    {% if data.edit %}Edit{% else %}Add new{% endif %} Resource
+    {% endif %}
+</h1>
 
 <div class="toolbar">
 	<div class="{% if BOOTSTRAP_VERSION|first == "4" %}float-right{% elif BOOTSTRAP_VERSION|first == "5"  %}float-end{% endif %}">
