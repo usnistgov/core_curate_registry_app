@@ -1,5 +1,4 @@
-""" Unit tests of curate_registry_utils
-"""
+"""Unit tests of curate_registry_utils"""
 
 from unittest.case import TestCase
 

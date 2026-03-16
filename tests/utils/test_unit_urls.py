@@ -1,5 +1,4 @@
-""" Urls test class
-"""
+"""Urls test class"""
 
 from unittest import TestCase
 

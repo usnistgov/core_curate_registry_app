@@ -1,5 +1,4 @@
-"""Data util for curate_registry app
-"""
+"""Data util for curate_registry app"""
 
 
 def get_jquery_selector_from_data_structure(data_id_list):

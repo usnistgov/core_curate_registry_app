@@ -1,5 +1,4 @@
-"""Curate registry app user ajax
-"""
+"""Curate registry app user ajax"""
 
 from django.utils.decorators import method_decorator
 from django.views.generic import View
